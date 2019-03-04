@@ -1,0 +1,46 @@
+body {
+  background-image: linear-gradient( 252.6deg,  rgba(255,100,241,1) 13.2%, rgba(67,220,255,1) 81.3% );
+  word-break: break-all;
+}
+
+ul {
+  list-style: none;
+}
+
+.img-steem {
+  width:200px;
+  height:200px;
+}
+
+.title {
+  text-align: center;
+  color: white;
+}
+
+.list-group-item {
+  display: flex;
+}
+
+.post-detail {
+    border-radius: .25rem;
+    padding: .75rem 1.25rem;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.post-detail > h1, .post-detail > ul {
+	text-align: center;
+	padding-inline-start: 0;
+}
+
+.post-detail > p > img {
+	text-align: center;
+}
+
+img {
+    max-width: 100%;
+}
+
+.post-list {
+	padding-inline-start: 0;
+}
