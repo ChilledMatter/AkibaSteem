@@ -19,6 +19,13 @@ class App extends Component {
     this.onTermSubmit("anime");
   }
 
+  
+  me = () => {
+    SteemConnect.me(function(err, res) {
+      console.log(err, res);
+    });
+  };
+
   onTermSubmit = async term => {
     var query = {
       tag: term,
@@ -40,6 +47,7 @@ class App extends Component {
     return (
       <Container fluid={false} className="my-5">
         <Button href={this.link}>Login</Button>
+        <Button onClick={this.me}>Me</Button>
         <Row>
           <Col xs={6} md={6}>
             <SearchBar onFormSubmit={this.onTermSubmit} />

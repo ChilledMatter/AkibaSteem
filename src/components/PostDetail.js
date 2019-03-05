@@ -9,10 +9,7 @@ class PostDetail extends Component {
     this.access_token = new URLSearchParams(document.location.search).get(
       "access_token"
     );
-    if (this.access_token) {
-      SteemConnect.setAccessToken(this.access_token);
-      console.log(this.access_token);
-    }
+    SteemConnect.setAccessToken(this.access_token);
   }
 
   calculatePostUrl = steemitUrl => {
@@ -23,40 +20,36 @@ class PostDetail extends Component {
     return `${steemitUrl}/@${this.props.post.author}`;
   };
 
-  submitComment = () => {
-
-  SteemConnect.comment("eaudebla", "crowthelegendvrreview-mdnmolwle9", "eaudebla", "re-crowthelegendvrreview-mdnmolwle9", "", "this is a test", "", function (err, res) {
-    console.log(err, res);
-});
-
-}
-
   vote = () => {
     let voter = new URLSearchParams(document.location.search).get("username");
     let author = this.props.post.author;
-    //let author = new URLSearchParams(document.location.search).get("username");
     let permlink = this.props.post.permlink;
-    console.log(voter);
-    console.log(author);
-    console.log(permlink);
-    console.log(10000);
-    console.log(this.props.post);
+    let weight = "10000";
 
-    SteemConnect.vote(voter, author, permlink, 10000, function(err, res) {
-      console.log(err, res);
-    });
-  };
-
-  me = () => {
-    SteemConnect.me(function(err, res) {
-      console.log(err, res);
-    });
+  SteemConnect.vote(voter, author, permlink, weight, function (err, res) {
+  console.log(err, res)
+});
   };
 
   follow = () => {
     SteemConnect.follow("eaudebla", "osakaghoul", function(err, res) {
       console.log(err, res);
     });
+  };
+
+  comment = () => {
+    SteemConnect.comment(
+      "eaudebla",
+      "crowthelegendvrreview-mdnmolwle9",
+      "eaudebla",
+      "re-crowthelegendvrreview-mdnmolwle9",
+      "",
+      "this is a test",
+      "",
+      function(err, res) {
+        console.log(err, res);
+      }
+    );
   };
 
   renderPost() {
@@ -93,9 +86,8 @@ class PostDetail extends Component {
           </ul>
           <div>{reactElement}</div>
           <div className="text-right">
-            <Button onClick={this.submitComment}>Comment</Button>
+            <Button onClick={this.comment}>Comment</Button>
             <Button onClick={this.vote}>Vote</Button>
-            <Button onClick={this.me}>Me</Button>
             <Button onClick={this.follow}>Follow</Button>
           </div>
         </div>
