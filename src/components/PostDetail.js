@@ -21,18 +21,40 @@ class PostDetail extends Component {
   };
 
   comment = () => {
+
+    let author = this.props.post.author;
+    let commenter = new URLSearchParams(document.location.search).get("username");
+    let permlink = this.props.post.permlink;
+    let body = '<center><p>Hi!</p>'+
+               '<p>I am @eaudebla, a curator for AkibaSteem and this is just to let you know that I upvoted your post:</p>'+
+               '<div class="text-justify"><blockquote>We\'re an anime-focused community full of fans and good people!'+
+               'We aim to find good anime &amp; manga content, share a happy moment &amp; give some visibility. Keep up the great work!</blockquote></div>'+
+               '<p><b>Also, feel free to join our community on Discord!</b></p>'+
+               '<p><a href="https://discord.gg/7JQruwm"><img src="https://i.imgur.com/9z0Lrzv.png"></a></p>'+
+               '<a href="https://discord.gg/7JQruwm">https://discord.gg/7JQruwm</a></center>';
+
     SteemConnect.comment(
-      "eaudebla",
-      "crowthelegendvrreview-mdnmolwle9",
-      "eaudebla",
-      "re-crowthelegendvrreview-mdnmolwle9",
+      author,
+      permlink,
+      commenter,
+      "re-"+permlink,
       "",
-      "this is a test",
+      body,
       "",
       function(err, res) {
         console.log(err, res);
       }
     );
+  };
+
+    vote = () => {
+    let voter = new URLSearchParams(document.location.search).get("username");
+    let author = this.props.post.author;
+    //let author = new URLSearchParams(document.location.search).get("username");
+    let permlink = this.props.post.permlink;
+    SteemConnect.vote(voter, author, permlink, 10000, function(err, res) {
+      console.log(err, res);
+    });
   };
 
   renderPost() {
@@ -69,6 +91,7 @@ class PostDetail extends Component {
           </ul>
           <div>{reactElement}</div>
           <div className="text-right">
+            <Button onClick={this.vote}>Vote</Button>
             <Button onClick={this.comment}>Comment</Button>
           </div>
         </div>
