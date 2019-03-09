@@ -20,23 +20,6 @@ class PostDetail extends Component {
     return `${steemitUrl}/@${this.props.post.author}`;
   };
 
-  vote = () => {
-    let voter = new URLSearchParams(document.location.search).get("username");
-    let author = this.props.post.author;
-    let permlink = this.props.post.permlink;
-    let weight = "10000";
-
-  SteemConnect.vote(voter, author, permlink, weight, function (err, res) {
-  console.log(err, res)
-});
-  };
-
-  follow = () => {
-    SteemConnect.follow("eaudebla", "osakaghoul", function(err, res) {
-      console.log(err, res);
-    });
-  };
-
   comment = () => {
     SteemConnect.comment(
       "eaudebla",
@@ -87,8 +70,6 @@ class PostDetail extends Component {
           <div>{reactElement}</div>
           <div className="text-right">
             <Button onClick={this.comment}>Comment</Button>
-            <Button onClick={this.vote}>Vote</Button>
-            <Button onClick={this.follow}>Follow</Button>
           </div>
         </div>
       );
